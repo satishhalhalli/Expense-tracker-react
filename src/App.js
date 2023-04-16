@@ -12,7 +12,7 @@ import { Route,Redirect,Switch} from "react-router-dom";
 import { Navbar, NavLink, } from "react-bootstrap";
 import Forgot from "./SignUp/Forgot";
 
-
+import ExpenseForm from "./ExpensesForm/ExpensesInput";
 function App() {
   const ctx=useContext(AuthContext)
   const history=useHistory();
@@ -36,7 +36,7 @@ function App() {
                     <Route path='/Forgot' exact><Forgot /> </Route>
                       <Route path="/"><SignUp exact/></Route>
                     
-  
+                      <Route path="/ExpensesForm/ExpensesInput"><ExpenseForm /></Route>
     </Switch>
  </>
   )
