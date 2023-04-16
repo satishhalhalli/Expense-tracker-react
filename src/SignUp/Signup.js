@@ -10,7 +10,7 @@ import { AuthContext } from '../AUth/AuthContext'
 
 
 
-
+//add
 
 const SignUp=()=>{
     const [email,SetEmail]=useState();
