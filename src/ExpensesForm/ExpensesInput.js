@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 
 import{Row,Col,Form,Card,Button,Container} from 'react-bootstrap'
-
+import axios from 'axios';
 
 const ExpenseForm = (props) => {
 const [enteredExpense,setEnteredExpense]=  useState('')
@@ -9,7 +9,16 @@ const [enteredDetails,setEnteredDetails] = useState('')
 const [enteredCategory,setEnteredCategory] = useState('')
 const [enteredData,setEnteredData]=useState([]);
 
-
+useEffect(()=>{
+    async function GetDate(){
+      let res=await axios.get('https://ecommerce-186d4-default-rtdb.firebaseio.com/expenseItems.json');
+      const data = await Object.values(res.data);
+      console.log(res);
+      // setEnteredData(data);
+  
+    }
+    GetDate()
+  },[])
 const expenseHandler  =(event) =>{
  
 
@@ -25,7 +34,7 @@ const categoryHandler =(event)=>{
 
     setEnteredCategory(event.target.value)  
 }
-const SubmitHandler = (event) =>{
+async function SubmitHandler (event){
 event.preventDefault()
 
 const obj = {
@@ -34,7 +43,9 @@ const obj = {
     enteredCategory
 }
 
-
+let res=await axios.post('https://ecommerce-186d4-default-rtdb.firebaseio.com/expenseItems.json',obj);
+let data=await res.data;
+console.log(data);
 setEnteredData((prevexpense)=>{
   return [...prevexpense,obj]
 })
